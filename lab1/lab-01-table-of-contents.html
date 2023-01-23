@@ -9,7 +9,38 @@
 		// Write your JavaScript code here that populates #tableOfContents with a <ul> which in turn contains one <li> for each <h2> below.
 		// Want a harder challenge? Put <a> in <li> that leads to the <h2>.
 		// Want a harder challenge? Add a button one can click to toggle the visibility of the table of contents.
-		
+
+		document.addEventListener("DOMContentLoaded", () => {
+			// Get section tag
+			const section = document.querySelector("#tableOfContents")
+
+			// Create ul tag. Set its visibility to "block" for button functionality
+			const ul = document.createElement("ul")
+			ul.style.display = "block"
+
+			// Get headers (as list)
+			const headers = document.querySelectorAll("h2")
+			
+			// Iterate through headers, create a li element for each one and attach it to ul
+			for(const h of headers) {
+				let li = document.createElement("li")
+				li.innerText = h.innerText
+				ul.appendChild(li)
+			}
+
+			// Create button tag which will toggle visibility
+			const btn = document.createElement("button")
+			btn.innerText = "Toggle visibility"
+
+			// Button functionality. Toggles ul's visibility by altering its style.display property
+			btn.addEventListener("click", () => {
+				ul.style.display = (ul.style.display === "block") ? "none" : "block"
+			})
+
+			// Append button and ul to section tag
+			section.appendChild(btn)
+			section.appendChild(ul)
+		})
 	</script>
 </head>
 <body>
