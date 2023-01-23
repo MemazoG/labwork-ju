@@ -12,6 +12,44 @@
 		// out operations and what the result was. Clicking on one of them,
 		// auto fills the form with that operation.
 		
+		document.addEventListener("DOMContentLoaded", () => {
+			// Get references to form, inputs, select, and span tags
+			const form = document.querySelector("#calculatorForm")
+			const opd1 = document.querySelector("#operand1")
+			const opd2 = document.querySelector("#operand2")
+			const op = document.querySelector("#operation")
+			const res = document.querySelector("#result")
+
+			// Add event listener on form submit
+			form.addEventListener("submit", (e) => {
+				// Prevent default
+				e.preventDefault()
+
+				let result
+
+				// Depending on the operator, perform corresponding operation
+				switch(op.value) {
+					case "add":
+						result = opd1.valueAsNumber + opd2.valueAsNumber
+						break
+
+					case "sub":
+						result = opd1.valueAsNumber - opd2.valueAsNumber
+						break
+
+					case "mul":
+						result = opd1.valueAsNumber * opd2.valueAsNumber
+						break
+
+					case "div":
+						result = opd1.valueAsNumber / opd2.valueAsNumber
+						break
+				}
+
+				// Place result
+				res.innerText = result
+			})
+		})
 	</script>
 </head>
 <body>
