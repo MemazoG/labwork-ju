@@ -8,6 +8,34 @@
 		
 		// Write your JavaScript code here.
 		// Display the error messages wherever you think it makes most sense.
+
+		document.addEventListener("DOMContentLoaded", () => {
+			// Get references to form and input tags
+			const form = document.querySelector("#createAccountForm")
+			const email = document.querySelector("#email")
+			const pw1 = document.querySelector("#password1")
+			const pw2 = document.querySelector("#password2")
+
+			const result = document.createElement("h3")
+
+			// On form submit, checks input requirements
+			form.addEventListener("submit", (e) => {
+				// Check requirements
+				const emailReq = email.value.includes("@")
+				const pw1Req = pw1.value.length >= 8
+				const pw2Req = pw1.value === pw2.value
+
+				if(emailReq && pw1Req && pw2Req) {
+					result.innerText = "Success! Account created" // Not shown because page reloads (no e.preventDedault())
+				} else {
+					e.preventDefault()
+					result.innerText = "Failure! Requirements not met"
+				}
+
+				// Attach result message to body
+				form.parentNode.appendChild(result)
+			})
+		})
 		
 	</script>
 </head>
