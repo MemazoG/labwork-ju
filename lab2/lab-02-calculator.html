@@ -5,29 +5,18 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Lab 2 - Calculator</title>
 	<script>
-		
-		// Write your JavaScript code here.
-		// The result of the computation should be shown in the span element.
-		// Want a harder challenge? Also show a list with previously carried
-		// out operations and what the result was. Clicking on one of them,
-		// auto fills the form with that operation.
-		
 		document.addEventListener("DOMContentLoaded", () => {
-			// Get references to form, inputs, select, and span tags
 			const form = document.querySelector("#calculatorForm")
 			const opd1 = document.querySelector("#operand1")
 			const opd2 = document.querySelector("#operand2")
 			const op = document.querySelector("#operation")
 			const res = document.querySelector("#result")
 
-			// Add event listener on form submit
-			form.addEventListener("submit", (e) => {
-				// Prevent default
+			form.addEventListener("submit", (e) => {				
 				e.preventDefault()
 
 				let result
 
-				// Depending on the operator, perform corresponding operation
 				switch(op.value) {
 					case "add":
 						result = opd1.valueAsNumber + opd2.valueAsNumber
@@ -46,7 +35,6 @@
 						break
 				}
 
-				// Place result
 				res.innerText = result
 			})
 		})

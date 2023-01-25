@@ -5,35 +5,38 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Lab 3 - Validating Forms</title>
 	<script>
-		
-		// Write your JavaScript code here.
-		// Display the error messages wherever you think it makes most sense.
-
 		document.addEventListener("DOMContentLoaded", () => {
-			// Get references to form and input tags
 			const form = document.querySelector("#createAccountForm")
 			const email = document.querySelector("#email")
 			const pw1 = document.querySelector("#password1")
 			const pw2 = document.querySelector("#password2")
 
-			const result = document.createElement("h3")
+			const resultMsgDiv = document.createElement("div")
 
-			// On form submit, checks input requirements
+			const addToDiv = (msg) => {
+				const msgElement = document.createElement("h3")
+				msgElement.innerText = msg
+				resultMsgDiv.appendChild(msgElement)
+			}
+
 			form.addEventListener("submit", (e) => {
-				// Check requirements
-				const emailReq = email.value.includes("@")
-				const pw1Req = pw1.value.length >= 8
-				const pw2Req = pw1.value === pw2.value
+				resultMsgDiv.innerHTML = ""
+				
+				const emailRequirement = email.value.includes("@")
+				const password1Requirement = pw1.value.length >= 8
+				const password2Requirement = pw1.value === pw2.value
 
-				if(emailReq && pw1Req && pw2Req) {
-					result.innerText = "Success! Account created" // Not shown because page reloads (no e.preventDedault())
+				if(emailRequirement && password1Requirement && password2Requirement) {
+					addToDiv("Success! Account created")
 				} else {
 					e.preventDefault()
-					result.innerText = "Failure! Requirements not met"
+					addToDiv("Failure!")
+					if(!emailRequirement) { addToDiv("Email must include '@'") }
+					if(!password1Requirement) { addToDiv("Password must be at least 8 characters") }
+					if(!password2Requirement) { addToDiv("Passwords do not match") }
 				}
 
-				// Attach result message to body
-				form.parentNode.appendChild(result)
+				form.parentNode.appendChild(resultMsgDiv)
 			})
 		})
 		

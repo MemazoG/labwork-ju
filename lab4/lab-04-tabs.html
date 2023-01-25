@@ -27,23 +27,15 @@
 		}
 	</style>
 	<script>
-		// Write your JavaScript code here.
 		document.addEventListener("DOMContentLoaded", () => {
 
-			// Get reference to each section by looking at #section's children
-			const sections = document.querySelector("#sections").children
+			const sections = document.querySelectorAll("#sections section")
+			const containerDiv = document.createElement("div")
+			containerDiv.classList.add("container")
 
-			// Create links tag where buttons for each section will be placed
-			const links = document.createElement("span")
-			links.classList.add("container")
-
-			// Function that makes a determined section visible
-			// Receives the name of the section and uses it to identify it from the rest
 			const handleClick = (sectionName) => {
-				console.log("You clicked", sectionName)
 				for(const s of sections) {
-					// If name matches, toggle visibility. If not, hide
-					if(s.children[0].innerText === sectionName) {
+					if(s.querySelector("h1").innerText === sectionName) {
 						s.classList.toggle("invisible")
 					} else {
 						s.classList.add("invisible")
@@ -51,23 +43,19 @@
 				}
 			}
 
-			// Iterate over sections and create a button for each
 			for(const s of sections) {
 				s.classList.add("invisible")
 
-				const name = s.children[0].innerText
+				const name = s.querySelector("h1").innerText
 				const sectionBtn = document.createElement("button")
 				sectionBtn.innerText = name
 
-				// Button functionality (visibility class toggle)
 				sectionBtn.addEventListener("click", function() {handleClick(name)})
 				
-				// Append button to container
-				links.appendChild(sectionBtn)
+				containerDiv.appendChild(sectionBtn)
 			}
 
-			// Add links container to body
-			document.querySelector("#sections").parentElement.prepend(links)
+			document.querySelector("#sections").parentElement.prepend(containerDiv)
 		})
 	</script>
 </head>
